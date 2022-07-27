@@ -1,32 +1,34 @@
-version: '3.8'
+version: '3.3'
 services:
-  php-apache-environment:
-    container_name: webserver
+  http:
     build:
-      context: ./app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile : Dockerfile
+    container_name: web
     depends_on:
-      - database-environment
+     - mysql   
     volumes:
-      - ./app:/var/www/html/
+      - ./app:/var/www/html
     ports:
-      - 8000:80
-  database-environment:
-    container_name: database
-    image: mysql:8.0
+      - 7777:80
+      
+  mysql:
+    build:
+      context: .
+      dockerfile : Dockerfile1 
+    container_name: databases
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
-    environment:
-        MYSQL_DATABASE: contact
-        MYSQL_USER: root
-        MYSQL_PASSWORD: 
-    ports:
-        - "3306:3306"
-  phpmyadmin:
-    image: phpmyadmin:5.2.0-apache
-    ports:
-        - '8008:80'
+
+  admindb:
+    container_name: phpmyadmin
+    image: phpmyadmin:latest
     restart: always
+    ports:
+      - 8888:80
     environment:
-        PMA_HOST: database
+      #- PMA_ARBITRARY=1
+        PMA_HOST: databases
     depends_on:
-        - database-environment
+      - mysql
+ 
