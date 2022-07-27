@@ -2,5 +2,5 @@
 
 require_once('./connexion.php');
 $sql="DELETE FROM employes ";
-$result=$cnx->query($sql);
+$result=$connect->query($sql);
 header("location:index.php#Affichage");
