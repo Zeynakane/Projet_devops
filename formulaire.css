@@ -1,0 +1,99 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-image: url(image/photo11.jpg);
+    background-size: cover;
+}
+
+.form{
+    position: absolute;
+    top: 3%;
+    width: 550px;
+    height: 610px;
+    padding: 0 5px;
+    left: 30%;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    background-color: #fff;
+    
+    
+}
+
+
+.content-table{
+    margin-bottom: 250px;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 35px;
+    display: flex;
+    background-color: #fff;
+    justify-content: center;
+   
+
+}
+
+tr{
+    border-bottom: 1px solid #f3f3f3;
+}
+
+td{
+    padding: 10px 8px;
+    font-family: calibri light;
+    font-weight: bold;
+    text-align: center;  
+}
+
+.champs{
+    width: 220px;
+    height: 30px;
+    background: #f3f3f3;
+    opacity: 0.86;
+    border: 1px solid #f3f3f3;
+    border-radius: 15px;
+    font-size: 12px;
+    
+}
+
+.bouton{
+    position: absolute;
+    left: 25%;
+    top: 80%;
+    width: 150px;
+    height: 40px;
+    background-color: #2c3e50;
+    font-family: calibri light;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #2c3e50;
+/*    border-radius: 25px;*/
+    opacity: 0.93;
+}
+
+a{
+    text-decoration: none;
+    font-family: calibri light;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    position: absolute;
+    top: 80%;
+    left: 55%;
+    padding: 10px 0px 10px 0px;
+    background-color: transparent;
+/*    border: 1px solid #2c3e50;*/
+/*    border-radius: 25px;*/
+    text-align: center;
+    width: 150px;
+        
+}
+
+.bouton:hover{
+   opacity: 0.86;
+    
+}
+
+a:hover{
+    opacity: 0.86;
+}
