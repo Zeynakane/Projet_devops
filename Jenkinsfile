@@ -7,8 +7,8 @@ pipeline {
         stage('start container') {
             steps {
                    
-                    sh 'sudo -S docker-compose up  '
-                    sh ' sudo -S docker-compose ps'
+                    sh 'echo Groupe3@2022 | sudo -S docker-compose up  '
+                    sh 'echo Groupe3@2022 |  sudo -S docker-compose ps'
                 
             }
         }
