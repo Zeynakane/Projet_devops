@@ -2,6 +2,19 @@ pipeline {
     agent any
 
     stages {
+        stage('version') {
+            steps {
+             
+                    sh '''
+                    docker version
+                    docker info
+                    docker compose version
+                    curl --version
+                    jq --version
+                    '
+                
+            }
+        }
         stage('docker donnees') {
             steps {
              
