@@ -12,7 +12,7 @@ services:
       
   mysql:
     image: BDD_gestion_employes:2.3
-    container_name: BDD_gestion_employes
+    container_name: bdd_gestion_employes
     command: --default-authentication-plugin=mysql_native_password
     restart: always
 
@@ -24,7 +24,7 @@ services:
       - 1313:80
     environment:
       #- PMA_ARBITRARY=1
-        PMA_HOST:BDD_gestion_employes
+        PMA_HOST:bdd_gestion_employes
     depends_on:
       - mysql
  
