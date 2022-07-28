@@ -4,18 +4,11 @@ pipeline {
     stages {
        
        
-        stage('docker donnees') {
-            steps {
-             
-                    sh 'docker system prume -a --volumes -f'
-                
-            }
-        }
         stage('start container') {
             steps {
              
-                    sh 'docker compose up -d --no-color --wait'
-                    sh 'docker compose ps'
+                    sh 'docker-compose up -d --no-color --wait'
+                    sh 'docker-compose ps'
                 
             }
         }
@@ -27,7 +20,7 @@ pipeline {
             }
         }
         post {
-            sh 'docker compose down --remove-orphans -v'
+            sh 'docker-compose down --remove-orphans -v'
               sh 'docker compose ps'
         }
     }
