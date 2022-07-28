@@ -3,13 +3,7 @@ pipeline {
 
     stages {
            
-        stage('Récupération du code sur la branche main') {
-            
-            steps {
-                echo 'Clonage des repertoires'   
-                sh 'git clone https://github.com/Zeynakane/Projet_devops.git'            
-            }
-        }
+      
         
         
         
