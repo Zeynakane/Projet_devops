@@ -23,7 +23,7 @@ pipeline {
         stage('Test de l’application avec curl et navigateur web') {
             steps {
                 echo 'Testing app with curl and web navigator ....'
-                sh 'curl http://localhost:9999/ -I'
+                sh 'curl http://localhost:5555/ -I'
             }
         }
 
@@ -31,19 +31,19 @@ pipeline {
             steps {
                 echo 'Logging to Docker Hub ....'
                 sh 'docker login -u moussakane -p Master2@2022'
-                echo 'Tagging appli_web ....'
-                sh 'docker tag appli_web moussakane/appli_web:1.0'
+                echo 'Tagging appli_webe ....'
+                sh 'docker tag appli_webe moussakane/appli_webe:1.0'
                 echo 'Taggingdb database ....'
-                sh 'docker tag bd_database SsenUsername/bd_database:1.0'
+                sh 'docker tag bd_databases SsenUsername/bd_databases:1.0'
             }
         }
 
         stage('Push des images Docker sur Docker Hub') {
             steps {
                 echo 'Pushing the app to Docker Hub'
-                sh 'docker push moussakane/appli_web:1.0'
+                sh 'docker push moussakane/appli_webe:1.0'
                 echo 'Pushing the database to Docker Hub'
-                sh 'docker push moussakane/bd_database:1.0'
+                sh 'docker push moussakane/bd_databases:1.0'
             }
         }
 
