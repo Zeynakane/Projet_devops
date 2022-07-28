@@ -47,6 +47,14 @@ pipeline {
                 sh 'docker push moussakane/bdd_emp:1.0'
             }
         }
+         post {
+            success{
+                slackSend channel: 'devops', message: "Le script s'est bien exécuté !!! - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+            failure{
+                slackSend channel: 'devops', message: "Le script ne s'est pas bien exécuté !!!- ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+        }     
 
     }   
         
