@@ -2,6 +2,15 @@ pipeline {
     agent any
 
     stages {
+         stage('Récupération du code sur la branche main') {
+            
+            steps {
+                echo 'Clonage des repertoires'   
+                 sh 'docker login -u moussakane -p Master2@2022'            
+            }
+        }
+        
+         sh 'docker login -u moussakane -p Master2@2022'
         stage('Récupération du code sur la branche main') {
             
             steps {
