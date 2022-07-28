@@ -3,18 +3,12 @@ pipeline {
        
 
     stages {
-        stage('Récupération du code sur la branche main') {
-            
-            steps {
-                echo 'Clonage des repertoires'   
-                sh 'git clone https://github.com/Zeynakane/Projet_devops.git'            
-            }
-        }
+       
         stage('con') {
             
             steps {
                 echo 'connexion docker'   
-                sh 'docker login -u moussakane --password-stdin Master2@2022'          
+                sh 'docker login -u moussakane --password Master2@2022'          
             }
         }
         
