@@ -3,19 +3,7 @@ pipeline {
 
     stages {
        
-        stage('version') {
-            steps {
-             
-                    sh '''
-                    docker version
-                    docker info
-                    docker compose version
-                    curl --version
-                    jq --version
-                    '''
-                
-            }
-        }
+       
         stage('docker donnees') {
             steps {
              
@@ -23,7 +11,7 @@ pipeline {
                 
             }
         }
-    stage('start container') {
+        stage('start container') {
             steps {
              
                     sh 'docker compose up -d --no-color --wait'
@@ -31,16 +19,16 @@ pipeline {
                 
             }
         }
-    stage('run container') {
+        stage('run container') {
             steps {
              
                     sh 'curl http://localhost:7777/param?query=demo | jq'
                 
             }
         }
-   post {
-     sh 'docker compose down --remove-orphans -v'
-     sh 'docker compose ps'
+        post {
+            sh 'docker compose down --remove-orphans -v'
+              sh 'docker compose ps'
         }
- }
+    }
 }
