@@ -2,14 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('version') {
-            steps {
-             
-                  sh 'curl -L https://github.com/docker/compose/releases/download/1.25.3/run.sh -o /usr/local/bin/docker-compose'
-                  sh 'chmod +x /usr/local/bin/docker-compose'
-                
-            }
-        }
+       
         stage('version') {
             steps {
              
