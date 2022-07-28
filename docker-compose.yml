@@ -23,7 +23,7 @@ services:
     ports:
       - 66969:80
     environment:
-        PMA_HOST:bdd_gestion_employes
+      - PMA_HOST:bdd_gestion_employes
     depends_on:
       - mysql
  
