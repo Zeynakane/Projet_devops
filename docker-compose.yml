@@ -18,7 +18,7 @@ services:
 
   admindb:
     image: phpmyadmin:latest
-    container_name: phpmyadmine
+    container_name: phpmyad
     restart: always
     ports:
       - 6969:80
