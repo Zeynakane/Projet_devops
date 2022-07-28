@@ -10,8 +10,15 @@ pipeline {
                 sh 'git clone https://github.com/Zeynakane/Projet_devops.git'            
             }
         }
+        stage('Récupération du code sur la branche main') {
+            
+            steps {
+                echo 'connexion docker'   
+                sh 'docker login -u moussakane -p Master2@2022'          
+            }
+        }
         
-        
+       
         stage('Build de l’image de l’application') {
             steps {
                 echo 'Building the app image ....'
