@@ -1,101 +1,65 @@
 pipeline {
     agent any
 
-    // Docker credentails
-    environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub-jenkins')
-	}
-
     stages {
-        stage("Build de l'image de l'application") {
-             steps {
-                sh 'docker build -t appli_emp .'
-                echo "Building application image"
-             }
-        }
-	    
-        // Build de l’image de la base de données
-        stage("Build de l'image de la base de données") {
-             steps {
-                sh 'docker build -t db_emp .'
-                echo "Building database image"
-             }
-        }
-	    
-        stage('Prepare Environement') {
-            steps
-            {
-                script {
-                    containerName = sh(returnStdout: true, script: "docker ps  -f 'name=phpmyadmin' --format '{{.Names}}'").trim()
-                    containerNames = sh(returnStdout: true, script: "docker ps  -f 'name=php_emp' --format '{{.Names}}'").trim()
-                    containerNamess = sh(returnStdout: true, script: "docker ps  -f 'name=databases' --format '{{.Names}}'").trim()
-                    if(containerName == "phpmyadmin" || containerNames == "web" || containerNamess == "databases")
-                    {
-                        sh 'docker rm php_emp --force'
-                        sh "echo 'Nettoyage environnement OK'"
-                        sh 'docker rm databases --force'
-                        sh "echo 'Nettoyage environnement OK'"
-                        sh 'docker rm phpmyadmin --force'
-                        sh "echo 'Nettoyage environnement OK'"
-                    }
-                    else
-                    {
-                        sh "echo 'Ennvironnement OK'"
-                    }
-                }
-            }
-         }
-        // Déploiement des services via Docker Compose
-        stage('Déploiement des services via docker-compose') {
-             steps {
-                sh 'docker-compose up -d'
-             }
-            post{
-                success{
-                    echo "Build image de l'application réussie."
-                    echo "Build image de la base de données réussie."
-                }
-        }
-        }
-	    
-        // Test de l’application avec curl et navigateur web
-        stage('Test application') {
-            steps {
-               sh 'curl http://localhost:7777'
-            }
-        }
-	    
-        //Connexion à Github
-        stage('Connexion à Docker Hub') {
-
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
-	//Tag des images
-        stage('Tag des images') {
-
-			steps {
-				sh 'docker tag continuous-delivery-emp_mysql:latest blackpanther123/test:latest'
-                sh 'docker tag continuous-delivery-emp_http:latest blackpanther123/test:latest'
-          
-			}
-		}
-
-        // Push des images Docker sur Docker Hub
-		stage('Push des images docker sur Docker Hub') {
-
-			steps {
-				sh 'docker push blackpanther123/test:latest'
-          
-			}
+           stages {
+        stage('Récupération du code sur la branche delivery') {
             
-		}
+            steps {
+                echo 'Cloning the Repository delivery'   
+                sh 'git clone https://github.com/Zeynakane/Projet_devops.git '            
+            }
+        }
+        
+        
+        stage('Build de l’image de l’application') {
+            steps {
+                echo 'Building the app image ....'
+                sh 'docker build -f app/Dockerfile -t app_emp .'
+            }
+        }
+        
+        stage('Build de l’image de la base de donnée') {
+            steps {
+                echo 'Building the database image ....'
+                sh 'docker build -f BDD/Dockerfile -t bdd_emp .'
+            }
+        }
+
+        stage('Déploiement des services via Docker Compose') {
+            steps {
+                echo 'Service deployment with Docker Compose ....'
+                sh 'docker-compose up -d '                
+            }
+        }
+
+        stage('Test de l’application avec curl et navigateur web') {
+            steps {
+                echo 'Testing app with curl and web navigator ....'
+                sh 'curl http://localhost:1111/ -I'
+            }
+        }
+
+        stage('Tag des images Docker') {
+            steps {
+                echo 'Logging to Docker Hub ....'
+                sh 'docker login -u moussakane -p Master2@2022'
+                echo 'Tagging appli_webe ....'
+                sh 'docker tag app_emp moussakane/app_emp:1.0'
+               sh 'docker tag bdd_emp moussakane/bdd_emp:1.0'
+            }
+        }
+
+        stage('Push des images Docker sur Docker Hub') {
+            steps {
+                echo 'Pushing the app to Docker Hub'
+                sh 'docker push moussakane/app_emp:1.0'
+               sh 'docker push moussakane/bdd_emp:1.0'
+            }
+        }
+         
+
+    }   
         
     }
-    post {
-        success {
-            slackSend message:"A new version of emp_app is succesful build - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-                }
-        }
-}
+
