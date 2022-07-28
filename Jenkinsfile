@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    stages {
+     stages {
           
         stage('Récupération du code sur la branche delivery') {
             
@@ -57,9 +57,5 @@ pipeline {
                sh 'docker push moussakane/bdd_emp:1.0'
             }
         }
-         
-
-   }   
-        
+     }           
 }
-
