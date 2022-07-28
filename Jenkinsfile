@@ -15,14 +15,14 @@ pipeline {
         stage('Build de l’image de l’application') {
             steps {
                 echo 'Building the app image ....'
-                sh 'docker build -f app.Dockerfile -t app_emp .'
+                sh 'docker build -f app/Dockerfile -t app_emp .'
             }
         }
         
         stage('Build de l’image de la base de donnée') {
             steps {
                 echo 'Building the database image ....'
-                sh 'docker build -f BDD.Dockerfile -t bd_emp .'
+                sh 'docker build -f BDD/Dockerfile -t bd_emp .'
             }
         }
 
