@@ -1,9 +1,6 @@
 pipeline {
-    agent {
-        node {
-            label 'agent1'
-        }
-    }
+    agent any
+       
 
     stages {
         stage('Récupération du code sur la branche main') {
