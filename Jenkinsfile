@@ -10,7 +10,7 @@ pipeline {
             }
         }
         
-         sh 'docker login -u moussakane -p Master2@2022'
+        
         stage('Récupération du code sur la branche main') {
             
             steps {
