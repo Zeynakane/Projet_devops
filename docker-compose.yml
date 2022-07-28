@@ -11,7 +11,7 @@ services:
       - 1212:80
       
   mysql:
-    image: BDD_gestion_employes:2.3
+    image: bdd_gestion_employes:2.3
     container_name: bdd_gestion_employes
     command: --default-authentication-plugin=mysql_native_password
     restart: always
