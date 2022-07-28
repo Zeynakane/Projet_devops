@@ -3,32 +3,32 @@ services:
   http:
     build:
       context: .
-      dockerfile : ./app/Dockerfile
-    container_name: appli_webe
+      dockerfile : Dockerfile
+    container_name: app_emp
     depends_on:
      - mysql   
     volumes:
       - ./app:/var/www/html
     ports:
-      - 5555:80
+      - 1111:80
       
   mysql:
     build:
       context: .
-      dockerfile : ./BDD/Dockerfile
-    container_name: bd_databases
+      dockerfile : Dockerfile1
+    container_name: bdd_emp
     command: --default-authentication-plugin=mysql_native_password
     restart: always
 
   admindb:
-    container_name: phpmyadmins
+    container_name: phpmyadmi
     image: phpmyadmin:latest
     restart: always
     ports:
-      - 6666:80
+      - 2222:80
     environment:
       #- PMA_ARBITRARY=1
-        PMA_HOST: bd_databases
+        PMA_HOST: bdd_emp
     depends_on:
       - mysql
  
