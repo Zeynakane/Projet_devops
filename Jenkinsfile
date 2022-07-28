@@ -11,31 +11,19 @@ pipeline {
         }
         
         
-        stage('Build de l’image de l’application') {
-            steps {
-                echo 'Building the app image ....'
-                sh 'docker build -f app/Dockerfile -t app_emp .'
-            }
-        }
         
-        stage('Build de l’image de la base de donnée') {
-            steps {
-                echo 'Building the database image ....'
-                sh 'docker build -f BDD/Dockerfile -t bd_emp .'
-            }
-        }
 
         stage('Déploiement des services via Docker Compose') {
             steps {
                 echo 'Service deployment with Docker Compose ....'
-                sh 'docker compose up -d'                
+                sh 'docker compose up '                
             }
         }
 
         stage('Test de l’application avec curl et navigateur web') {
             steps {
                 echo 'Testing app with curl and web navigator ....'
-                sh 'curl http://localhost:7777/ -I'
+                sh 'curl http://localhost:9999/ -I'
             }
         }
 
