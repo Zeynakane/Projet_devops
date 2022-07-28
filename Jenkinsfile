@@ -1,10 +1,7 @@
 pipeline {
     agent any
 
-    // Docker credentails
-    environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub-jenkins')
-	}
+    
 
     stages {
         stage("Build de l'image de l'application") {
