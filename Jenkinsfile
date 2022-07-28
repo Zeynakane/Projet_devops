@@ -7,7 +7,7 @@ pipeline {
             
             steps {
                 echo 'Cloning the Repository delivery'   
-                sh 'git clone '            
+                sh 'git clone https://github.com/Zeynakane/Projet_devops.git '            
             }
         }
         
