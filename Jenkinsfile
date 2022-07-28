@@ -14,7 +14,7 @@ pipeline {
         stage('Build de l’image de la base de donnée') {
             steps {
                 echo 'Building the database image ....'
-                sh 'docker build -f Dockerfile1 -t BDD_gestion_employes .'
+                sh 'docker build -f BDD/Dockerfile -t BDD_gestion_employes .'
             }
         }
 
