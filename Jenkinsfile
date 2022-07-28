@@ -16,7 +16,7 @@ pipeline {
         stage('Déploiement des services via Docker Compose') {
             steps {
                 echo 'Service deployment with Docker Compose ....'
-                sh 'docker compose up '                
+                sh 'docker-compose up '                
             }
         }
 
@@ -31,19 +31,19 @@ pipeline {
             steps {
                 echo 'Logging to Docker Hub ....'
                 sh 'docker login -u moussakane -p Master2@2022'
-                echo 'Tagging emp app ....'
-                sh 'docker tag app_emp moussakane/app_emp:1.0'
-                echo 'Tagging SsenProjet database ....'
-                sh 'docker tag bd_SsenProjet SsenUsername/bd_SsenProjet:1.0'
+                echo 'Tagging appli_web ....'
+                sh 'docker tag appli_web moussakane/appli_web:1.0'
+                echo 'Taggingdb database ....'
+                sh 'docker tag bd_database SsenUsername/bd_database:1.0'
             }
         }
 
         stage('Push des images Docker sur Docker Hub') {
             steps {
                 echo 'Pushing the app to Docker Hub'
-                sh 'docker push moussakane/app_emp:1.0'
+                sh 'docker push moussakane/appli_web:1.0'
                 echo 'Pushing the database to Docker Hub'
-                sh 'docker push moussakane/bd_emp:1.0'
+                sh 'docker push moussakane/bd_database:1.0'
             }
         }
 
