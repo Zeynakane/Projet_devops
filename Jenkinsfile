@@ -1,18 +1,16 @@
 pipeline {
     agent any
-       
 
     stages {
-       
-        stage('con') {
+        stage('Récupération du code sur la branche main') {
             
             steps {
-                echo 'connexion docker'   
-                sh 'docker login -u moussakane --password Master2@2022'          
+                echo 'Clonage des repertoires'   
+                sh 'git clone https://github.com/Zeynakane/Projet_devops.git'            
             }
         }
         
-       
+        
         stage('Build de l’image de l’application') {
             steps {
                 echo 'Building the app image ....'
