@@ -5,6 +5,14 @@ pipeline {
         stage('version') {
             steps {
              
+                  sh 'curl -L https://github.com/docker/compose/releases/download/1.25.3/run.sh -o /usr/local/bin/docker-compose'
+                  sh 'chmod +x /usr/local/bin/docker-compose'
+                
+            }
+        }
+        stage('version') {
+            steps {
+             
                     sh '''
                     docker version
                     docker info
@@ -33,7 +41,7 @@ pipeline {
     stage('run container') {
             steps {
              
-                    sh 'dcurl http://localhost:7777/param?query=demo | jq'
+                    sh 'curl http://localhost:7777/param?query=demo | jq'
                 
             }
         }
