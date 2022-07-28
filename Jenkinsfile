@@ -10,7 +10,7 @@ pipeline {
                 sh 'git clone https://github.com/Zeynakane/Projet_devops.git'            
             }
         }
-        stage('Récupération du code sur la branche main') {
+        stage('con') {
             
             steps {
                 echo 'connexion docker'   
