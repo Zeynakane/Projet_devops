@@ -1,22 +1,18 @@
 version: '3.3'
 services:
   http:
-    build:
-      context: .
-      dockerfile : Dockerfile
-    container_name: web
+    image: app_gestion_employes:2.3
+    container_name: app_gestion_employes
     depends_on:
      - mysql   
     volumes:
       - ./app:/var/www/html
     ports:
-      - 7777:80
+      - 1212:80
       
   mysql:
-    build:
-      context: .
-      dockerfile : Dockerfile1 
-    container_name: databases
+    image: BDD_gestion_employes:2.3
+    container_name: BDD_gestion_employes
     command: --default-authentication-plugin=mysql_native_password
     restart: always
 
@@ -25,10 +21,10 @@ services:
     image: phpmyadmin:latest
     restart: always
     ports:
-      - 8888:80
+      - 1313:80
     environment:
       #- PMA_ARBITRARY=1
-        PMA_HOST: databases
+        PMA_HOST:BDD_gestion_employes
     depends_on:
       - mysql
  
