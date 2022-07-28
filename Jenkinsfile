@@ -2,15 +2,7 @@ pipeline {
     agent any
 
     stages {
-         stage('Récupéraranche main') {
-            
-            steps {
-                echo 'Clonage detoires'   
-                 sh 'docker login -u moussakane -p Master2@2022'            
-            }
-        }
-        
-        
+           
         stage('Récupération du code sur la branche main') {
             
             steps {
@@ -32,7 +24,7 @@ pipeline {
         stage('Test de l’application avec curl et navigateur web') {
             steps {
                 echo 'Testing app with curl and web navigator ....'
-                sh 'curl http://localhost:5555/ -I'
+                sh 'curl http://localhost:1111/ -I'
             }
         }
 
@@ -41,18 +33,18 @@ pipeline {
                 echo 'Logging to Docker Hub ....'
                 sh 'docker login -u moussakane -p Master2@2022'
                 echo 'Tagging appli_webe ....'
-                sh 'docker tag appli_webe moussakane/appli_webe:1.0'
+                sh 'docker tag app_emp moussakane/app_emp:1.0'
                 echo 'Taggingdb database ....'
-                sh 'docker tag bd_databases SsenUsername/bd_databases:1.0'
+                sh 'docker tag bdd_emp SsenUsername/bdd_emp:1.0'
             }
         }
 
         stage('Push des images Docker sur Docker Hub') {
             steps {
                 echo 'Pushing the app to Docker Hub'
-                sh 'docker push moussakane/appli_webe:1.0'
+                sh 'docker push moussakane/app_emp:1.0'
                 echo 'Pushing the database to Docker Hub'
-                sh 'docker push moussakane/bd_databases:1.0'
+                sh 'docker push moussakane/bdd_emp:1.0'
             }
         }
 
