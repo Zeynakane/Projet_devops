@@ -6,11 +6,9 @@ pipeline {
        
         stage('start container') {
             steps {
-                    sh 'usermod -aG docker $USER'
-                    sh 'ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose'
-                    sh 'service docker restart'
-                    sh 'docker-compose up  '
-                    sh 'docker-compose ps'
+                   
+                    sh 'sudo docker-compose up  '
+                    sh 'sudo docker-compose ps'
                 
             }
         }
