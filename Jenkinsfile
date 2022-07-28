@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-           stages {
+          
         stage('Récupération du code sur la branche delivery') {
             
             steps {
