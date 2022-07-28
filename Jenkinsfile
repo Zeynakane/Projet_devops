@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Build de l'image de l'application") {
              steps {
-		sh 'docker login'
+		
                 sh 'docker build -t appli_emp .'
                 echo "Building application image"
              }
