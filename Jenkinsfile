@@ -29,7 +29,7 @@ pipeline {
                 echo 'Tagging appli_webe ....'
                 sh 'docker tag app_emp moussakane/app_emp:1.0'
                 echo 'Taggingdb database ....'
-                sh 'docker tag bdd_emp SsenUsername/bdd_emp:1.0'
+                sh 'docker tag bdd_emp moussakane/bdd_emp:1.0'
             }
         }
 
