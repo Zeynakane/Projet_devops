@@ -4,11 +4,6 @@ pipeline {
     
 
     stages {
-	stage (git & repo) {
-	     steps {
-		  bat "git clone https://github.com/Zeynakane/Projet_devops.git"
-	     }
-	}
         stage("Build de l'image de l'application") {
              steps {
                 sh 'docker build -t appli_emp .'
