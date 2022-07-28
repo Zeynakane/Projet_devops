@@ -4,9 +4,9 @@ pipeline {
     stages {
         stage('Build  Image appli') {
             steps {
-                dir("app") {
+             
                     sh 'docker build -t appli-emp .'
-                }
+                
             }
         }
         stage('Prepare Environement') {
