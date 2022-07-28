@@ -2,7 +2,7 @@ pipeline {
     agent any
 
    
-        
+      stages {
         
         stage('Build de l’image de l’application') {
             steps {
