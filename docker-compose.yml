@@ -17,13 +17,12 @@ services:
     restart: always
 
   admindb:
-    container_name: phpmyadmin
     image: phpmyadmin:latest
+    container_name: phpmyadmin
     restart: always
     ports:
-      - 1313:80
+      - 66969:80
     environment:
-      #- PMA_ARBITRARY=1
         PMA_HOST:bdd_gestion_employes
     depends_on:
       - mysql
