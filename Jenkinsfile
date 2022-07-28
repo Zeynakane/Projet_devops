@@ -15,7 +15,7 @@ pipeline {
         stage('Build de l’image de l’application') {
             steps {
                 echo 'Building the app image ....'
-                sh 'docker build -f Dockerfile -t app_gestion_employes .'
+                sh 'docker build -f Dockerfile --tag app_gestion_employes .'
             }
         }
         
