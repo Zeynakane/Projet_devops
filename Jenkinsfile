@@ -1,15 +1,7 @@
 pipeline {
     agent any
 
-    stages {
-           
-        stage('Récupération du code sur la branche delivery') {
-            
-            steps {
-                echo 'Cloning the Repository delivery'   
-                sh 'git clone https://github.com/Zeynakane/Projet_devops.git '            
-            }
-        }
+   
         
         
         stage('Build de l’image de l’application') {
