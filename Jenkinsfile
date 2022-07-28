@@ -2,11 +2,29 @@ pipeline {
     agent any
 
     stages {
-           
-      
+           stages {
+        stage('Récupération du code sur la branche delivery') {
+            
+            steps {
+                echo 'Cloning the Repository delivery'   
+                sh 'git clone '            
+            }
+        }
         
         
+        stage('Build de l’image de l’application') {
+            steps {
+                echo 'Building the app image ....'
+                sh 'docker build -f app/Dockerfile -t app_emp .'
+            }
+        }
         
+        stage('Build de l’image de la base de donnée') {
+            steps {
+                echo 'Building the database image ....'
+                sh 'docker build -f BDD/Dockerfile -t bdd_emp .'
+            }
+        }
 
         stage('Déploiement des services via Docker Compose') {
             steps {
@@ -28,7 +46,7 @@ pipeline {
                 sh 'docker login -u moussakane -p Master2@2022'
                 echo 'Tagging appli_webe ....'
                 sh 'docker tag app_emp moussakane/app_emp:1.0'
-               
+               sh 'docker tag bdd_emp moussakane/bdd_emp:1.0'
             }
         }
 
@@ -36,7 +54,7 @@ pipeline {
             steps {
                 echo 'Pushing the app to Docker Hub'
                 sh 'docker push moussakane/app_emp:1.0'
-               
+               sh 'docker push moussakane/bdd_emp:1.0'
             }
         }
          
