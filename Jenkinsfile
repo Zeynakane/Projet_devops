@@ -14,7 +14,7 @@ pipeline {
             
             steps {
                 echo 'connexion docker'   
-                sh 'docker login -u moussakane -p Master2@2022'          
+                sh 'docker login -u moussakane --password-stdin Master2@2022'          
             }
         }
         
