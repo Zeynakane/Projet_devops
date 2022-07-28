@@ -1,0 +1,34 @@
+version: '3.3'
+services:
+  http:
+    build:
+      context: .
+      dockerfile : Dockerfile
+    container_name: web
+    depends_on:
+     - mysql   
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - 7777:80
+      
+  mysql:
+    build:
+      context: .
+      dockerfile : Dockerfile1 
+    container_name: databases
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+
+  admindb:
+    container_name: phpmyadmin
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 8888:80
+    environment:
+      #- PMA_ARBITRARY=1
+        PMA_HOST: databases
+    depends_on:
+      - mysql
+ 
