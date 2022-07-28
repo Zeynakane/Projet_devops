@@ -28,8 +28,7 @@ pipeline {
                 sh 'docker login -u moussakane -p Master2@2022'
                 echo 'Tagging appli_webe ....'
                 sh 'docker tag app_emp moussakane/app_emp:1.0'
-                echo 'Taggingdb database ....'
-                sh 'docker tag bdd_emp moussakane/bdd_emp:1.0'
+               
             }
         }
 
@@ -37,8 +36,7 @@ pipeline {
             steps {
                 echo 'Pushing the app to Docker Hub'
                 sh 'docker push moussakane/app_emp:1.0'
-                echo 'Pushing the database to Docker Hub'
-                sh 'docker push moussakane/bdd_emp:1.0'
+               
             }
         }
          
